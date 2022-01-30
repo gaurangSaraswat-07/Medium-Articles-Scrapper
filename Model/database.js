@@ -20,8 +20,8 @@ conn.connect(function(error){
 let tag=[];
 let date=[];
 
-function processing()
-{
+function processing() {
+
     date.length=0;
     tag.length=0;
     conn.query("select tag from information order by id desc",function(error,data){
@@ -47,7 +47,33 @@ function processing()
                 date.push(data[i].date);
             }   
         }
-        
+
     });
 }
+
+function display() {
+    let obj={ "tag":tag, "date":date }
+    return obj;
+}
+
+function insertquery(tag) {
+    let tdate= new Date;
+    let s=`insert into information (tag,date) values (${JSON.stringify(tag)},${JSON.stringify(tdate).slice(0,11)+"\""})`;
+    conn.query(s ,function(error){
+        if(!!error){
+            console.log('Query error');
+        }
+        else {
+            console.log('Insert Success');
+        }
+    });
+}
+module.exports = {insertquery,displayquery,processquery};
+
+
+
+
+
+
+
 
