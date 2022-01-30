@@ -1,0 +1,25 @@
+{
+  "name": "medium-articles-scrapper",
+  "version": "1.0.0",
+  "description": "This is a simple scrapper of medium.com site which scrapes the latest articles of various topics.",
+  "main": "request.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaurangSaraswat-07/Medium-Articles-Scrapper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaurangSaraswat-07/Medium-Articles-Scrapper/issues"
+  },
+  "homepage": "https://github.com/gaurangSaraswat-07/Medium-Articles-Scrapper#readme",
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "cheerio": "^1.0.0-rc.10",
+    "request": "^2.88.2"
+  }
+}
