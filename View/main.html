@@ -1,9 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+      @media (min-width: 600px){
+       body {
+          background-color: blanchedalmond;
+       }
+      }
+      @media (max-width: 599px) {  
+        /* how are web pages will look on different screen size */
+       body {
+          background-color: lightskyblue;
+       }
+      }
+    </style>
 </head>
 <body>
-    Medium Scrapper
+  <div style="display: flex; margin-left: 35%;">
+     <h1>Medium Article Scrapper</h1>
+     <img src="scrapper.png" width="50px">
+  </div>
+  <nav class=" navbar navbar-dark bg-dark justify-content-between">
+    <form class="form-inline">
+      &nbsp;&nbsp;
+      <button class="btn btn-outline-light" type="button" onclick="location.href='/history'">History</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input class="form-control mr-sm-2 butt-mar" id="search-bar" type="search" placeholder="Search" aria-label="Search">&nbsp;&nbsp;
+      <button class="btn btn-outline-light" type="button" onclick="postreq(document.getElementById('search-bar').value)">Search</button>&nbsp;&nbsp;
+
+    </form>
+  </nav>
+
+  <br/>
+  <div id="tags">
+  </div>
+  <br>
+  <div id="component">
+  </div>
+  <script>
+    function pending()
+    {
+      document.getElementById("component").innerHTML="";
+      document.getElementById("tags").innerHTML="";
+      var global=document.getElementById("component");
+
+      for(let i=0;i<10;i++)
+      {
+        var a1 = document.createElement("div");
+        a1.classList.add("card");
+        a1.classList.add("center");
+
+          var b1 = document.createElement("div");
+          b1.classList.add("card-body");
+
+            var c1=document.createElement("p");
+            c1.classList.add("card-text");
+            c1.classList.add("carcol");
+            c1.innerText="....";
+
+            var c2=document.createElement("h5");
+            c2.classList.add("card-title");
+            c2.classList.add("carcol");
+            c2.innerText-"pending..."
+
+            var c3=document.createElement("p");
+            c3.classList.add("card-text");
+            c3.classList.add("carcol");
+            c3.innerText="...";
+
+            var c4=document.createElement("div");
+            c4.classList.add("details");
+
+            var c6=document.createElement("h5");
+            c6.classList.add("card-title");
+            c6.classList.add("carcol");
+            c6.innerText="pending...";
+
+              var d1=document.createElement("div");
+              d1.classList.add("idetails");
+              d1.innerText="pending...";
+
+              var d2=document.createElement("div");
+              d2.classList.add("idetails");
+              d2.innerText="pending...";
+
+              c4.appendChild(d1);
+              c4.appendChild(d2);
+
+            var c5=document.createElement("a");
+            c5.innerText="Read";
+            c5.classList.add("btn");
+            c5.classList.add("btn-primary");
+            c5.classList.add("bttn");
+            c5.setAttribute("target","_blank");
+            
+
+          b1.appendChild(c1);
+          b1.appendChild(c6);
+          b1.appendChild(c2);
+          b1.appendChild(c3);
+          b1.appendChild(c4);
+          b1.appendChild(c5);
+
+        a1.appendChild(b1);
+        var a2 = document.createElement("br");
+    
+        global.appendChild(a1);
+        global.appendChild(a2);
+      }
+    }
+    async function postreq(tag)
+    {
+      pending();
+      let contag="";
+      for(let i=0;i<tag.length;i++)
+      {
+        if(tag[i]===" ")contag=contag+"-";
+        else contag=contag+tag[i];
+      }
+      console.log(contag);
+      let j={
+        "tagname":contag
+      }
+
+      $.ajax({
+      type:'post',
+      url:'/api',
+      data:j,
+      async:false
+      });
+
+
+      await new Promise((resolve) =>
+          setTimeout(() => {
+              resolve();
+          }, 500)
+      );
+
+      
+      let obj={};
+      $.ajax({
+        type:'get',
+        url:'/api2',
+        async:false,
+        success:function(data){
+          obj=data;
+        }
+      });     
+
+      if(obj.title.length==0){
+        document.getElementById("component").innerHTML="";
+        var global=document.getElementById("tags");
+        var a1 = document.createElement("h4");
+        a1.classList.add("head");
+        a1.innerText="Page not Found";
+        global.appendChild(a1);
+        return;
+      }
+      
+      var global=document.getElementById("tags");
+      var a1 = document.createElement("h4");
+      a1.classList.add("head");
+      a1.innerText="Related Tags:";
+      global.appendChild(a1);
+
+      for(let i=0;i<obj.tags.length;i++)
+      {
+        var b1 = document.createElement("button");
+        b1.classList.add("newbtn");
+        b1.classList.add("btn");
+        b1.classList.add("btn-outline-success");
+        b1.innerText=obj.tags[i];
+        global.appendChild(b1);
+      }
+  
+       for(let j=0;j<obj.title.length;j++)
+        {
+          let a=document.getElementsByClassName('card-body');
+          a[j].getElementsByClassName('card-text')[0].innerText="Crawling..";
+          a[j].getElementsByClassName('card-title')[0].innerText="Crawling..";
+          a[j].getElementsByClassName('card-text')[1].innerText="Crawling..";
+          a[j].getElementsByClassName('idetails')[0].innerText="Crawling..";
+          a[j].getElementsByClassName('idetails')[1].innerText="Crawling..";
+ 
+          await new Promise((resolve) =>
+              setTimeout(() => {
+                  resolve();
+              }, 500)
+          );
+
+          a[j].getElementsByClassName('card-text')[0].innerText=obj.creator[j];
+          a[j].getElementsByClassName('card-title')[0].innerText=obj.title[j]
+          a[j].getElementsByClassName('card-text')[1].innerText=obj.blog[j];
+          a[j].getElementsByClassName('idetails')[0].innerText=obj.upload[j];
+          a[j].getElementsByClassName('idetails')[1].innerText=obj.time[j];
+
+          if(obj.links.length>0 && obj.links[j][0]=='/') {
+            a[j].getElementsByTagName('a')[0].href=`https://medium.com${obj.links[j]}`;
+          }
+          else 
+            a[j].getElementsByTagName('a')[0].href=obj.links[j];
+
+        } 
+    }
+  </script>
 </body>
 </html>
