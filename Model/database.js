@@ -56,7 +56,7 @@ function display() {
     return obj;
 }
 
-function insertquery(tag) {
+function insert(tag) {
     let tdate= new Date;
     let s=`insert into information (tag,date) values (${JSON.stringify(tag)},${JSON.stringify(tdate).slice(0,11)+"\""})`;
     conn.query(s ,function(error){

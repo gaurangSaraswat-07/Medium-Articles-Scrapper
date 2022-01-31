@@ -1,0 +1,14 @@
+.navbar navbar-light.navbar-brand{
+  margin-left: 20px;
+}
+.center{
+    width:70px;
+    margin: auto;
+    width: 80%;
+  }
+  .navbar-brand{
+    margin-left:50px;
+  }
+  .right{
+      margin-right: 50px;
+  }
