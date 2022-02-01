@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'MediumArticleScrapper'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_95C7471166504D7FA544C48A5F38A0B1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_007A557A840E473C95FDEA7B99844DB6 }}
           package: .
