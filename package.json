@@ -2,9 +2,9 @@
   "name": "medium-articles-scrapper",
   "version": "1.0.0",
   "description": "This is a simple scrapper of medium.com site which scrapes the latest articles of various topics.",
-  "main": "request.js",
+  "main": "application.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node application.js"
   },
   "repository": {
     "type": "git",
