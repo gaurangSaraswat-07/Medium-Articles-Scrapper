@@ -4,7 +4,7 @@
   "description": "This is a simple scrapper of medium.com site which scrapes the latest articles of various topics.",
   "main": "request.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,14 @@
   },
   "homepage": "https://github.com/gaurangSaraswat-07/Medium-Articles-Scrapper#readme",
   "dependencies": {
+    "body-parser": "^1.19.1",
     "chalk": "^5.0.0",
     "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.2",
+    "http-msgs": "^1.0.9",
+    "make-synchronous": "^1.0.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15",
     "request": "^2.88.2"
   }
 }

@@ -1,6 +1,6 @@
 const request =require("request");      //request module
 const cheerio = require("cheerio");     //using cheerio library for parsing
-const chalk = require("chalk");         //for styling
+// const chalk = require("chalk");         //for styling
 
 //creating the arrays to store the scrape content
 let creator = [];
@@ -9,14 +9,14 @@ let links = [];
 let tags = [];
 let time = [];
 let upload = []; 
-let blogs = [];
+let blog = [];
 
 function search(tag)
 {
-    creator.length=0; title.length=0; links.length=0; tags.length=0; time.length=0; upload.length=0; blogs.length=0;
+    creator.length=0; title.length=0; links.length=0; tags.length=0; time.length=0; upload.length=0; blog.length=0;
 
     if(tag.length===0){
-        console.log(chalk.gray("Search bar empty"));
+        console.log("Search bar empty");
         return;
     }
 
@@ -31,11 +31,12 @@ function search(tag)
 
             $('h3').each((i,el)=>{
                 if(i>=1 && i<=10)
-                    blogs.push($(el).text());
+                    blog.push($(el).text());
             });
 
             $('h2').each((i,el)=>{
-                if(i<10)title.push($(el).text());
+                if(i<10)
+                    title.push($(el).text());
             });
   
             $('h4').each((i,el)=>{
@@ -74,9 +75,9 @@ function search(tag)
 
 function getjson()
 {   
-    let object = { "creator":creator, "title":title, "links":links, "tags":tags, "time":time, "upload":upload, "blogs":blogs };
-    console.log(chalk.black(object));
-    return object;
+    let obj = { "creator":creator, "title":title, "links":links, "tags":tags, "time":time, "upload":upload, "blog":blog };
+    console.log(obj);
+    return obj;
 }
 
 module.exports = {search , getjson};

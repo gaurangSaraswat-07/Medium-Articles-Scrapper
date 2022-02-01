@@ -9,7 +9,7 @@ var conn = mysql.createConnection({
 });
 
 conn.connect(function(error){
-    if(!!error){
+    if(error){
         console.log('Error');
     }
     else{
@@ -21,11 +21,10 @@ let tag=[];
 let date=[];
 
 function processing() {
-
-    date.length=0;
     tag.length=0;
+    date.length=0;
     conn.query("select tag from information order by id desc",function(error,data){
-        if(!!error){
+        if(error){
             console.log('Error in the Query');
         }
         else {
@@ -37,7 +36,7 @@ function processing() {
         }
     });
     conn.query("select date from information order by id desc", function(error,data){
-        if(!!error){
+        if(error){
             console.log('Error in the Query');
         }
         else {
@@ -60,7 +59,7 @@ function insert(tag) {
     let tdate= new Date;
     let s=`insert into information (tag,date) values (${JSON.stringify(tag)},${JSON.stringify(tdate).slice(0,11)+"\""})`;
     conn.query(s ,function(error){
-        if(!!error){
+        if(error){
             console.log('Query error');
         }
         else {
@@ -68,7 +67,7 @@ function insert(tag) {
         }
     });
 }
-module.exports = {insertquery,displayquery,processquery};
+module.exports = {insert,display,processing};
 
 
 
